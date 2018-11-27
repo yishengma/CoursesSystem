@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CoursesSystem</string>
+    <string name="sno">学号</string>
+    <string name="name">姓名</string>
+    <string name="course_system">选课系统</string>
+    <string name="student">学生</string>
+    <string name="teacher">教师</string>
+    <string name="manager">管理员</string>
+    <string name="login">登录</string>
+</resources>

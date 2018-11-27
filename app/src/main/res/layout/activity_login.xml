@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlue"
+    tools:context="piratehat.coursessystem.ui.LoginActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/til_account"
+        android:gravity="center"
+        android:text="@string/course_system"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/til_password"
+        android:layout_marginTop="70dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:textColorHint="@color/colorWhite"
+        app:counterOverflowTextAppearance="@style/TextOverCount">
+
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/sno"
+            android:inputType="number"
+            android:textColor="@color/colorWhite" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:textColorHint="@color/colorWhite"
+        app:counterOverflowTextAppearance="@style/TextOverCount"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorWhite">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="@string/name"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til_password"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <RadioButton
+            android:checked="true"
+            android:id="@+id/rbtn_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/student" />
+
+        <RadioButton
+            android:id="@+id/rbtn_teacher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/teacher" />
+
+        <RadioButton
+            android:id="@+id/rbtn_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/manager" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rg_button"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textColor="@color/colorBlue"
+        android:textSize="20sp" />
+</RelativeLayout>
