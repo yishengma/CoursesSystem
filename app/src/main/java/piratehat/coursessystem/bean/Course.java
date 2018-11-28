@@ -5,6 +5,25 @@ public class Course {
     private int mNo;
     private String mName;
     private String mSchool;
+    private Teacher mTeacher;
+    private Integer mScore;
+
+
+    public Integer getScore() {
+        return mScore;
+    }
+
+    public void setScore(Integer score) {
+        mScore = score;
+    }
+
+    public Teacher getTeacher() {
+        return mTeacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        mTeacher = teacher;
+    }
 
     public int getNo() {
         return mNo;

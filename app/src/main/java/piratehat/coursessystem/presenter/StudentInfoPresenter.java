@@ -30,13 +30,18 @@ public class StudentInfoPresenter implements IStudentInfoContract.IPresenter {
     }
 
     @Override
-    public void update(Student student) {
-        mIModel.update(this, student);
+    public void add(Student student) {
+        mIModel.add(this,student);
     }
 
     @Override
-    public void deleteCallBack(String msg) {
-        mIView.deleteCallBack(msg);
+    public void addCallback(boolean add, Student student) {
+        mIView.addCallback(add, student);
+    }
+
+    @Override
+    public void deleteCallBack(boolean delete, String msg) {
+        mIView.deleteCallBack(delete, msg);
     }
 
     @Override
@@ -44,10 +49,6 @@ public class StudentInfoPresenter implements IStudentInfoContract.IPresenter {
         mIModel.getStudents(this);
     }
 
-    @Override
-    public void updateCallback(Student student) {
-        mIView.updateCallback(student);
-    }
 
     @Override
     public void delete(String sno) {

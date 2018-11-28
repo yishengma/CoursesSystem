@@ -10,6 +10,7 @@
     <color name="colorBlueDeep">#74c4f4</color>
     <color name="colorBlack">#232323</color>
 
+
     <drawable name="drawableBlue">#a9daf7</drawable>
     <drawable name="drawableBlueDeep">#74c4f4</drawable>
 

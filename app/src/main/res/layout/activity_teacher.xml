@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context="piratehat.coursessystem.ui.TeacherActivity">
 
+    <include layout="@layout/include_tab_viewpager" />
 </android.support.constraint.ConstraintLayout>

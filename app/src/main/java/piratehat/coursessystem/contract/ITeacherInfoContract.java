@@ -16,34 +16,39 @@ public interface ITeacherInfoContract {
 
         void setTeachers(List list);
 
-        void updateCallback(Teacher teacher);
 
-        void deleteCallBack(String msg);
+        void addCallback(boolean add,Teacher teacher);
+
+        void deleteCallBack(boolean delete,String msg);
     }
 
     interface IModel {
 
         void getTeachers(IPresenter presenter);
 
-        void update(IPresenter presenter, Teacher teacher);
 
         void delete(IPresenter presenter, String tno);
+
+        void add(IPresenter presenter,Teacher teacher);
     }
 
     interface IPresenter {
+
         void showError(String msg);
 
         void setTeacher(List list);
 
-        void update(Teacher teacher);
 
-        void deleteCallBack(String msg);
+        void deleteCallBack(boolean delete,String msg);
+
+        void addCallback(boolean add,Teacher teacher);
 
         void getTeachers();
 
-        void updateCallback(Teacher teacher);
 
         void delete(String tno);
+
+        void add(Teacher teacher);
     }
 
 

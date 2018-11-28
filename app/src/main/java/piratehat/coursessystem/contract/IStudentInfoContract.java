@@ -15,16 +15,19 @@ public interface IStudentInfoContract {
 
         void setStudents(List list);
 
-        void updateCallback(Student student);
 
-        void deleteCallBack(String msg);
+
+        void addCallback(boolean add,Student student);
+
+        void deleteCallBack(boolean delete,String msg);
     }
 
     interface IModel {
 
         void getStudents(IPresenter presenter);
 
-        void update(IPresenter presenter, Student student);
+
+        void add(IPresenter presenter,Student student);
 
         void delete(IPresenter presenter, String sno);
     }
@@ -34,13 +37,15 @@ public interface IStudentInfoContract {
 
         void setStudents(List list);
 
-        void update(Student student);
 
-        void deleteCallBack(String msg);
+        void add(Student student);
+
+        void deleteCallBack(boolean delete,String msg);
 
         void getStudents();
 
-        void updateCallback(Student student);
+
+        void addCallback(boolean add,Student student);
 
         void delete(String sno);
     }

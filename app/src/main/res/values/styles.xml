@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorWhite</item>
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+
     </style>
     <style name="TextOverCount" parent="Base.TextAppearance.AppCompat.Light.Widget.PopupMenu.Small">
         <item name="android:textColor">@color/colorWhite</item>
@@ -13,5 +15,18 @@
 
     </style>
 
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.Self"
+        parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
+        <!--修改AlertDialog按钮的颜色-->
+        <item name="colorAccent">@color/colorWhite</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:background">@color/colorBlue</item>
+        <item name="android:windowBackground">@color/colorBlue</item>
+        <item name="android:textColorPrimary">@color/colorWhite</item>
+
+
+    </style>
 
 </resources>

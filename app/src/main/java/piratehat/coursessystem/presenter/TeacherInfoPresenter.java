@@ -36,19 +36,18 @@ public class TeacherInfoPresenter implements ITeacherInfoContract.IPresenter {
     }
 
     @Override
-    public void update(Teacher teacher) {
-        mIModel.update(this, teacher);
+    public void deleteCallBack(boolean delete, String msg) {
+        mIView.deleteCallBack(delete, msg);
     }
 
     @Override
-    public void deleteCallBack(String msg) {
-        mIView.deleteCallBack(msg);
+    public void addCallback(boolean add, Teacher teacher) {
+        mIView.addCallback(add, teacher);
     }
 
-
     @Override
-    public void updateCallback(Teacher teacher) {
-        mIView.updateCallback(teacher);
+    public void add(Teacher teacher) {
+        mIModel.add(this, teacher);
     }
 
     @Override

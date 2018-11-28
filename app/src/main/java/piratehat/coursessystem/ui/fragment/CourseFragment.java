@@ -9,93 +9,80 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import piratehat.coursessystem.R;
-import piratehat.coursessystem.adapter.InfoAdapter;
+import piratehat.coursessystem.adapter.CourseAdapter;
 import piratehat.coursessystem.base.BaseFragment;
-import piratehat.coursessystem.bean.Student;
-import piratehat.coursessystem.constant.Constant;
-import piratehat.coursessystem.contract.IStudentInfoContract;
-import piratehat.coursessystem.presenter.StudentInfoPresenter;
+import piratehat.coursessystem.bean.Course;
+import piratehat.coursessystem.contract.ICourseContract;
+import piratehat.coursessystem.presenter.CoursePresenter;
 
 /**
- * Created by PirateHat on 2018/11/27.
+ * Created by PirateHat on 2018/11/28.
  */
 
-public class StudentInfoFragment extends BaseFragment implements IStudentInfoContract.IView {
+public class CourseFragment extends BaseFragment implements ICourseContract.IView {
 
-
-    @BindView(R.id.rv_info)
-    RecyclerView mRvInfo;
+    @BindView(R.id.rv_course)
+    RecyclerView mRvCourse;
     @BindView(R.id.btn_add)
     FloatingActionButton mBtnAdd;
+    private List<Course> mCourses;
 
-    private List<Student> mStudents;
-    private InfoAdapter mAdapter;
-    private StudentInfoPresenter mPresenter;
-    private int mPosition;
+    private CourseAdapter mAdapter;
+    private CoursePresenter mPresenter;
 
 
     @Override
     protected int setLayoutResId() {
-        return R.layout.fragment_student_info;
+        return R.layout.fragment_course;
     }
 
     @Override
     protected void initData(Bundle bundle) {
-        mStudents = new ArrayList<>();
-        mAdapter = new InfoAdapter(mStudents, mActivity, Constant.STUDENT_TYPE);
-        mPresenter = new StudentInfoPresenter(this);
 
-
+        mPresenter = new CoursePresenter(this);
     }
 
-    @Override
-    protected void initView() {
-        mRvInfo.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
-        mRvInfo.setAdapter(mAdapter);
-
-    }
 
     @Override
     protected void onFragmentVisibleChange(boolean isVisible) {
         if (isVisible) {
-            mPresenter.getStudents();
+            mPresenter.getCourse();
         }
     }
 
     @Override
+    protected void initView() {
+        mCourses = new ArrayList<>();
+        mRvCourse.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false));
+        mAdapter = new CourseAdapter(mCourses, mActivity);
+        mRvCourse.setAdapter(mAdapter);
+
+    }
+
+    @Override
     protected void initListener() {
-        mAdapter.setListener(new InfoAdapter.OnClickListener() {
+        mAdapter.setListener(new CourseAdapter.OnClickListener() {
             @Override
-            public void OnClick(Object o, int position) {
-                mPosition = position;
-            }
-
-            @Override
-            public void OnLongClick(Object o, int position) {
-                mPosition = position;
-                showNormalDialog((Student) o);
-
+            public void OnClick(Course course) {
+                showNormalDialog(course);
             }
         });
-
         mBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showCustomizeDialog();
             }
         });
+
+
     }
 
     @Override
@@ -104,56 +91,48 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
     }
 
     @Override
-    public void setStudents(List list) {
-        mStudents.clear();
-        mStudents.addAll(list);
-        mAdapter.notifyDataSetChanged();
-    }
-
-
-    @Override
-    public void addCallback(boolean add, Student student) {
-
-        if (add) {
-            Toast.makeText(mActivity, "添加成功", Toast.LENGTH_SHORT).show();
-            mStudents.add(student);
-            mAdapter.notifyDataSetChanged();
-        }else {
-            Toast.makeText(mActivity, "添加失败", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void deleteCallBack(boolean delete, String msg) {
-        Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT).show();
-        if (delete) {
-            mStudents.remove(mPosition);
+    public void deleteCallback(boolean is, Course course) {
+        if (is) {
+            mCourses.remove(course);
             mAdapter.notifyDataSetChanged();
         }
     }
 
-    public static StudentInfoFragment newInstance(Bundle bundle) {
-        StudentInfoFragment fragment = new StudentInfoFragment();
+    @Override
+    public void addCallback(boolean is, Course course) {
+        if (is) {
+            mCourses.add(course);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void setCourses(List list) {
+        mCourses.clear();
+        mCourses.addAll(list);
+    }
+
+    public static CourseFragment newInstance(Bundle bundle) {
+        CourseFragment fragment = new CourseFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public static StudentInfoFragment newInstance() {
+    public static CourseFragment newInstance() {
         return newInstance(null);
     }
 
-
-    private void showNormalDialog(final Student student) {
+    private void showNormalDialog(final Course course) {
 
         final AlertDialog.Builder normalDialog =
                 new AlertDialog.Builder(mActivity);
         normalDialog.setTitle("删除？");
-        normalDialog.setMessage("确定删除学号为" + student.getNo() + "的学生？");
+        normalDialog.setMessage("确定删除编号为" + course.getNo() + "的课程？");
         normalDialog.setPositiveButton("确定",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mPresenter.delete(String.valueOf(student.getNo()));
+                        mPresenter.delete(course);
                     }
                 });
         normalDialog.setNegativeButton("取消",
@@ -172,8 +151,8 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
         AlertDialog.Builder customizeDialog =
                 new AlertDialog.Builder(mActivity);
         final View dialogView = LayoutInflater.from(mActivity)
-                .inflate(R.layout.dialog_student_info, null);
-        customizeDialog.setTitle("添加学生");
+                .inflate(R.layout.dialog_course, null);
+        customizeDialog.setTitle("添加课程");
 
         customizeDialog.setView(dialogView);
         customizeDialog.setPositiveButton("确定",
@@ -184,29 +163,23 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
 
                         EditText name = dialogView.findViewById(R.id.et_name);
 
-                        EditText age = dialogView.findViewById(R.id.et_age);
-
-                        EditText sex = dialogView.findViewById(R.id.et_sex);
-
                         EditText school = dialogView.findViewById(R.id.et_school);
 
                         boolean duplicate = false;
-                        for (Student s : mStudents) {
+                        for (Course s : mCourses) {
                             if (s.getNo() == Integer.valueOf(no.getText().toString())) {
-                                Toast.makeText(mActivity, "学号重复", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, "课程重复", Toast.LENGTH_SHORT).show();
                                 duplicate = true;
                                 break;
                             }
                         }
 
-                        if (!duplicate && isNull(no, name, age, sex, school)) {
-                            Student student = new Student();
-                            student.setAge(Integer.valueOf(age.getText().toString()));
-                            student.setName(name.getText().toString());
-                            student.setSchool(school.getText().toString());
-                            student.setSex(sex.getText().toString());
-                            student.setNo(Integer.valueOf(no.getText().toString()));
-                            mPresenter.add(student);
+                        if (!duplicate && isNull(no, name, school)) {
+                            Course course = new Course();
+                            course.setName(name.getText().toString());
+                            course.setSchool(school.getText().toString());
+                            course.setNo(Integer.valueOf(no.getText().toString()));
+                            mPresenter.add(course);
                         }
 
                     }
@@ -220,16 +193,6 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
         customizeDialog.show();
     }
 
-    private boolean isNull(String... strings) {
-
-        for (String string : strings) {
-            if (TextUtils.isEmpty(string)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private boolean isNull(EditText... editTexts) {
 
         for (EditText string : editTexts) {
@@ -240,6 +203,5 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
         }
         return true;
     }
-
 
 }

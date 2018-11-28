@@ -3,6 +3,7 @@ package piratehat.coursessystem.utils;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +27,6 @@ import okhttp3.Response;
 import piratehat.coursessystem.constant.Constant;
 
 /**
- *
- *
  * Created by PirateHat on 2018/10/27.
  */
 
@@ -91,6 +90,24 @@ public class OkHttpUtil {
      */
     public void postAsync(String url, OkHttpResultCallback okHttpResultCallback, Map<String, String> params) {
         Request request = buildPostRequest(url, params);
+        deliveryResult(okHttpResultCallback, request);
+    }
+
+    /**
+     * 异步的post请求,无文件传输
+     */
+    public void postAsyncFormData(String url, OkHttpResultCallback okHttpResultCallback, Map<String, String> params) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        for (String key : params.keySet()) {
+            builder.addFormDataPart(key, params.get(key));
+        }
+        RequestBody requestBody = builder.build();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(requestBody)
+                .build();
         deliveryResult(okHttpResultCallback, request);
     }
 

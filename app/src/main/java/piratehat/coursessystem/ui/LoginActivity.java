@@ -50,6 +50,10 @@ public class LoginActivity extends BaseActivity implements ILoginContract.IView 
 
     @Override
     protected void initListener() {
+//        mEtAccount.setText("123456");
+//        mEtPassword.setText("123456");
+                mEtAccount.setText("4650");
+        mEtPassword.setText("马大生");
         mRgButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

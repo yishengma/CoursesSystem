@@ -16,6 +16,7 @@ import piratehat.coursessystem.R;
 import piratehat.coursessystem.adapter.ViewPagerAdapter;
 import piratehat.coursessystem.base.BaseActivity;
 import piratehat.coursessystem.constant.Constant;
+import piratehat.coursessystem.ui.fragment.CourseFragment;
 import piratehat.coursessystem.ui.fragment.StudentInfoFragment;
 import piratehat.coursessystem.ui.fragment.TeacherInfoFragment;
 
@@ -47,6 +48,7 @@ public class ManagerActivity extends BaseActivity {
 
         viewPagerAdapter.addFragment(StudentInfoFragment.newInstance());
         viewPagerAdapter.addFragment(TeacherInfoFragment.newInstance());
+        viewPagerAdapter.addFragment(CourseFragment.newInstance());
 
 
         mVpContent.setAdapter(viewPagerAdapter);
@@ -55,6 +57,7 @@ public class ManagerActivity extends BaseActivity {
 
         mTlNavigation.getTabAt(0).setText(Constant.STUDENT);
         mTlNavigation.getTabAt(1).setText(Constant.TEACHER);
+        mTlNavigation.getTabAt(2).setText(Constant.COURSE);
 
 
     }

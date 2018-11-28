@@ -35,13 +35,13 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tv_age"
+        android:id="@+id/tv_tel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_sex"
         android:layout_marginStart="50sp"
         android:layout_toEndOf="@+id/tv_name"
-        android:text="23"
+        android:text="131313131313123"
         android:textColor="@color/colorBlack"
         android:textSize="20sp" />
 
