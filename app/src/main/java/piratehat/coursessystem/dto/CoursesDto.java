@@ -12,23 +12,24 @@ import piratehat.coursessystem.bean.Course;
 public class CoursesDto implements Mapper<List<Course>> {
     private String msg;
     private boolean result;
-    private List<Course_1> mCourse1s;
+    private List<Course_1> list;
 
 
     @Override
     public List<Course> transform() {
-        ArrayList<Course> list = new ArrayList<>();
-        for (int i = 0, size = mCourse1s.size(); i < size; i++) {
+        ArrayList<Course> courses = new ArrayList<>();
+
+        for (int i = 0, size = list.size(); i < size; i++) {
             Course course = new Course();
-            Course_1 course_1 = mCourse1s.get(i);
+            Course_1 course_1 = list.get(i);
             course.setNo(course_1.getNo());
             course.setName(course_1.getName());
             course.setSchool(course_1.getSchool());
-            list.add(course);
+            courses.add(course);
 
 
         }
-        return list;
+        return courses;
     }
 
     public String getMsg() {
@@ -47,12 +48,12 @@ public class CoursesDto implements Mapper<List<Course>> {
         this.result = result;
     }
 
-    public List<Course_1> getCourse1s() {
-        return mCourse1s;
+    public List<Course_1> getList() {
+        return list;
     }
 
-    public void setCourse1s(List<Course_1> course1s) {
-        mCourse1s = course1s;
+    public void setList(List<Course_1> list) {
+        this.list = list;
     }
 
     private class Course_1 {

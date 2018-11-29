@@ -22,6 +22,7 @@ public class TeacherDto implements Mapper<Teacher> {
         teacher.setNo(no);
         teacher.setSchool(school);
         teacher.setTel(tel);
+        teacher.setSex(sex);
         return teacher;
     }
 

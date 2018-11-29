@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".ui.StudentActivity" />
         <activity android:name=".ui.TeacherActivity" />
-        <activity android:name=".ui.ManagerActivity"></activity>
+        <activity android:name=".ui.ManagerActivity" />
+        <activity android:name=".ui.StudentScoreActivity"></activity>
     </application>
 
 </manifest>

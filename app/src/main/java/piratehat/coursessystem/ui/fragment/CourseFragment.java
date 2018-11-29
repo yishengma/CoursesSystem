@@ -95,6 +95,8 @@ public class CourseFragment extends BaseFragment implements ICourseContract.IVie
         if (is) {
             mCourses.remove(course);
             mAdapter.notifyDataSetChanged();
+            Toast.makeText(mActivity,"删除成功",Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -103,6 +105,7 @@ public class CourseFragment extends BaseFragment implements ICourseContract.IVie
         if (is) {
             mCourses.add(course);
             mAdapter.notifyDataSetChanged();
+            Toast.makeText(mActivity,"添加成功",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -110,6 +113,7 @@ public class CourseFragment extends BaseFragment implements ICourseContract.IVie
     public void setCourses(List list) {
         mCourses.clear();
         mCourses.addAll(list);
+        mAdapter.notifyDataSetChanged();
     }
 
     public static CourseFragment newInstance(Bundle bundle) {

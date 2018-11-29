@@ -9,7 +9,7 @@ import piratehat.coursessystem.bean.Student;
  * Created by PirateHat on 2018/11/28.
  */
 
-public class StudentDtos implements Mapper<List<Student>> {
+public class StudentDots implements Mapper<List<Student>> {
     private boolean result;
     private String msg;
     private List<StudentDto> list;
@@ -23,7 +23,7 @@ public class StudentDtos implements Mapper<List<Student>> {
             StudentDto dto = list.get(i);
             student.setNo(dto.getNo());
             student.setSex(dto.getSex());
-            student.setScore(null);
+            student.setScore(dto.getScore());
             student.setSchool(dto.getSchool());
             student.setName(dto.getName());
             student.setAge(dto.getAge());

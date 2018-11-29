@@ -39,6 +39,7 @@ public class LoginModel implements ILoginContract.IModel {
                         presenter.login(result.getStudent());
                     } else if (result.getType().equals(Constant.TEACHER)){
                         presenter.login(result.getTeacher());
+//                        Log.e(TAG, "onResponse: "+result.getTeacher());
                     }else {
                         presenter.login(null);
                     }

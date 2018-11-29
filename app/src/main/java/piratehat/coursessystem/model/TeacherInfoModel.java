@@ -43,7 +43,7 @@ public class TeacherInfoModel implements ITeacherInfoContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
                 Result result = GsonUtil.gsonToBean(msg, ResultDto.class).transform();
                 presenter.addCallback(result.isResult(), teacher);
             }
@@ -61,7 +61,7 @@ public class TeacherInfoModel implements ITeacherInfoContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
 
                 TeacherDtos teacherDtos = GsonUtil.gsonToBean(msg, TeacherDtos.class);
                 if (teacherDtos.isResult()) {
@@ -86,7 +86,7 @@ public class TeacherInfoModel implements ITeacherInfoContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
                 Result result = GsonUtil.gsonToBean(msg, ResultDto.class).transform();
                 presenter.deleteCallBack(result.isResult(), result.getMsg());
             }

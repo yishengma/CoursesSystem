@@ -13,6 +13,7 @@ public class StudentDto implements Mapper<Student> {
      private int no;
      private String school;
      private String sex;
+     private int score;
 
     @Override
     public Student transform() {
@@ -21,9 +22,17 @@ public class StudentDto implements Mapper<Student> {
         student.setName(name);
         student.setNo(no);
         student.setSchool(school);
-        student.setScore(null);
+        student.setScore(score);
         student.setSex(sex);
         return student;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public int getAge() {

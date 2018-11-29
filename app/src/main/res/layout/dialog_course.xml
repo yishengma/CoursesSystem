@@ -22,7 +22,7 @@
             android:id="@+id/et_no"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="@string/sno"
+            android:hint="@string/cno"
             android:inputType="number"
             android:textColor="@color/colorWhite" />
 

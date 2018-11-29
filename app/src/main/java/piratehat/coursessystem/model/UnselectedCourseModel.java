@@ -23,7 +23,7 @@ public class UnselectedCourseModel implements IUnselectedCourseContract.IModel {
     @Override
     public void getUnselectedCourses(final IUnselectedCourseContract.IPresenter presenter, String sno) {
         String url  = Constant.STUDENT_COURSE+"type=unselected&sno="+sno;
-        Log.e(TAG, "getUnselectedCourses: "+url );
+//        Log.e(TAG, "getUnselectedCourses: "+url );
         OkHttpUtil.getInstance().getAsync(url, new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
@@ -32,7 +32,7 @@ public class UnselectedCourseModel implements IUnselectedCourseContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: "+msg);
+//                Log.e(TAG, "onResponse: "+msg);
                 SelectCoursesDto selectCoursesDto = GsonUtil.gsonToBean(msg,SelectCoursesDto.class);
                 presenter.setUnselectedCourses(selectCoursesDto.transform());
             }
@@ -50,7 +50,7 @@ public class UnselectedCourseModel implements IUnselectedCourseContract.IModel {
 
            @Override
            public void onResponse(String msg) {
-               Log.e(TAG, "onResponse: "+msg );
+//               Log.e(TAG, "onResponse: "+msg );
                Result result = GsonUtil.gsonToBean(msg, ResultDto.class).transform();
                presenter.selectCallback(result.isResult(), course);
            }

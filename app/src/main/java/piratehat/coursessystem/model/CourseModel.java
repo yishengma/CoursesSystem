@@ -36,7 +36,7 @@ public class CourseModel implements ICourseContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
                 CoursesDto dto = GsonUtil.gsonToBean(msg, CoursesDto.class);
                 presenter.setCourses(dto.transform());
             }
@@ -57,7 +57,7 @@ public class CourseModel implements ICourseContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
                 Result result = GsonUtil.gsonToBean(msg, ResultDto.class).transform();
                 presenter.deleteCallback(result.isResult(), course);
             }
@@ -70,6 +70,7 @@ public class CourseModel implements ICourseContract.IModel {
         String url = Constant.MANAGER_ADD_COURSE;
         HashMap<String, String> map = new HashMap<>();
         map.put("info", GsonUtil.gsonToJson(new CoursePost(course.getName(), course.getNo(), course.getSchool())));
+//        Log.e(TAG, "add: "+map.get("info"));
         OkHttpUtil.getInstance().postAsyncFormData(url, new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
@@ -78,7 +79,7 @@ public class CourseModel implements ICourseContract.IModel {
 
             @Override
             public void onResponse(String msg) {
-                Log.e(TAG, "onResponse: " + msg);
+//                Log.e(TAG, "onResponse: " + msg);
                 Result result = GsonUtil.gsonToBean(msg, ResultDto.class).transform();
                 presenter.addCallback(result.isResult(), course);
             }
