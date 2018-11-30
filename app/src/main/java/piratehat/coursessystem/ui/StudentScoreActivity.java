@@ -40,6 +40,7 @@ public class StudentScoreActivity extends BaseActivity implements IStudentScoreC
     private ScoreAdapter mAdapter;
     private StudentScorePresenter mPresenter;
     private int mCno;
+    private String mName;
 
 
     @Override
@@ -69,8 +70,9 @@ public class StudentScoreActivity extends BaseActivity implements IStudentScoreC
         mCno = bundle.getInt("cno");
         mPresenter = new StudentScorePresenter(this);
         mPresenter.getStudents(tno,mCno );
-        mToolBar.setTitle(bundle.getString("name"));
+        mName= bundle.getString("name");
 
+        mToolBar.setTitle(mName);
 
 
     }
@@ -113,6 +115,8 @@ public class StudentScoreActivity extends BaseActivity implements IStudentScoreC
         mStudents.clear();
         mStudents.addAll(list);
         mAdapter.notifyDataSetChanged();
+        mToolBar.setTitle(mName+"("+list.size()+"人)");
+
     }
 
     @Override
