@@ -49,6 +49,10 @@ public class StudentInfoPresenter implements IStudentInfoContract.IPresenter {
         mIModel.getStudents(this);
     }
 
+    @Override
+    public void search(String str) {
+        mIModel.search(this,str);
+    }
 
     @Override
     public void delete(String sno) {

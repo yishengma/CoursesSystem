@@ -20,7 +20,7 @@ public class Constant {
 
 
 
-    private static final String IP_ADDRESS = "http://192.168.43.66:8080";
+    public static final String IP_ADDRESS = "http://192.168.43.66:8080";
     public static final String LOGIN = IP_ADDRESS + "/web/login";
 
     //管理员

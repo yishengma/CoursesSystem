@@ -30,6 +30,8 @@ public interface IStudentInfoContract {
         void add(IPresenter presenter,Student student);
 
         void delete(IPresenter presenter, String sno);
+
+        void search(IPresenter presenter,String str);
     }
 
     interface IPresenter {
@@ -48,6 +50,8 @@ public interface IStudentInfoContract {
         void addCallback(boolean add,Student student);
 
         void delete(String sno);
+
+        void search(String str);
     }
 
 

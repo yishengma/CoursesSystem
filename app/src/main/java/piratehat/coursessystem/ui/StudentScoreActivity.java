@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -112,6 +114,13 @@ public class StudentScoreActivity extends BaseActivity implements IStudentScoreC
 
     @Override
     public void setStudents(List list) {
+        if (list != null){
+            Student student  = (Student) list.get(0);
+            if(TextUtils.isEmpty(student.getName())){
+                list.remove(0);
+            }
+
+        }
         mStudents.clear();
         mStudents.addAll(list);
         mAdapter.notifyDataSetChanged();

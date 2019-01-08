@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,21 @@ import java.util.Stack;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.Call;
 import piratehat.coursessystem.R;
 import piratehat.coursessystem.adapter.InfoAdapter;
 import piratehat.coursessystem.base.BaseFragment;
 import piratehat.coursessystem.bean.Student;
 import piratehat.coursessystem.constant.Constant;
 import piratehat.coursessystem.contract.IStudentInfoContract;
+import piratehat.coursessystem.dto.StudentDots;
+import piratehat.coursessystem.dto.TeacherDtos;
 import piratehat.coursessystem.presenter.StudentInfoPresenter;
+import piratehat.coursessystem.utils.GsonUtil;
+import piratehat.coursessystem.utils.OkHttpResultCallback;
+import piratehat.coursessystem.utils.OkHttpUtil;
+
+import static android.support.v4.util.PatternsCompat.IP_ADDRESS;
 
 /**
  * Created by PirateHat on 2018/11/27.
@@ -44,6 +53,9 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
     private InfoAdapter mAdapter;
     private StudentInfoPresenter mPresenter;
     private int mPosition;
+
+    @BindView(R.id.btn_search)
+    FloatingActionButton mBtnSearch;
 
 
     @Override
@@ -96,6 +108,13 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
                 showCustomizeDialog();
             }
         });
+
+        mBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchDialog();
+            }
+        });
     }
 
     @Override
@@ -118,7 +137,7 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
             Toast.makeText(mActivity, "添加成功", Toast.LENGTH_SHORT).show();
             mStudents.add(student);
             mAdapter.notifyDataSetChanged();
-        }else {
+        } else {
             Toast.makeText(mActivity, "添加失败", Toast.LENGTH_SHORT).show();
         }
     }
@@ -166,6 +185,36 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
 
 
         normalDialog.show();
+    }
+
+    private void showSearchDialog() {
+
+        AlertDialog.Builder customizeDialog =
+                new AlertDialog.Builder(mActivity);
+        final View dialogView = LayoutInflater.from(mActivity)
+                .inflate(R.layout.dialog_search, null);
+        customizeDialog.setTitle("搜索");
+
+        customizeDialog.setView(dialogView);
+        customizeDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText no = dialogView.findViewById(R.id.et_str);
+                        if (!TextUtils.isEmpty(no.getText().toString())) {
+                            mPresenter.search(no.getText().toString());
+                            dialog.dismiss();
+                        }
+
+                    }
+                });
+        customizeDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        customizeDialog.show();
     }
 
     private void showCustomizeDialog() {
@@ -240,6 +289,8 @@ public class StudentInfoFragment extends BaseFragment implements IStudentInfoCon
         }
         return true;
     }
+
+
 
 
 }

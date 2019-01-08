@@ -72,7 +72,7 @@ public class TeachFragment extends BaseFragment implements ITeachContract.IView 
                 Bundle bundle = new Bundle();
                 bundle.putInt("cno", course.getNo());
                 bundle.putInt("tno", ((Teacher) App.getUser()).getNo());
-                bundle.putString(course.getName(), "");
+                bundle.putString("name", course.getName());
                 StudentScoreActivity.actionStart(mActivity, StudentScoreActivity.class, bundle);
             }
         });

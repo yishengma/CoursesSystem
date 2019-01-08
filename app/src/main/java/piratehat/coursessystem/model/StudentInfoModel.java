@@ -88,4 +88,25 @@ public class StudentInfoModel implements IStudentInfoContract.IModel {
         });
 
     }
+
+    @Override
+    public void search(final IStudentInfoContract.IPresenter presenter, String str) {
+        String url = Constant.IP_ADDRESS + "/web/student/like?str=" + str;
+        OkHttpUtil.getInstance().getAsync(url, new OkHttpResultCallback() {
+            @Override
+            public void onError(Call call, Exception e) {
+                presenter.showError(e.getMessage());
+            }
+
+            @Override
+            public void onResponse(String msg) {
+                StudentDots studentDots = GsonUtil.gsonToBean(msg, StudentDots.class);
+                if (studentDots.isResult()) {
+                    presenter.setStudents(studentDots.transform());
+                } else {
+                    presenter.showError(studentDots.getMsg());
+                }
+            }
+        });
+    }
 }
